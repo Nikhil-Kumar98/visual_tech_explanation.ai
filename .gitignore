@@ -216,3 +216,16 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ----- visual_tech_explanation.ai project assets -----
+# Don't commit large media; keep folder structure via .gitkeep.
+assets/broll/*
+assets/output/*
+assets/work/*
+assets/branding/*
+assets/voice/*
+!assets/**/.gitkeep
+# Topic progress ledger is local state
+data/topics_done.txt
+# Self-hosted Postiz (cloned official compose repo)
+postiz/

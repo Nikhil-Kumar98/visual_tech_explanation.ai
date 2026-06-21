@@ -1,0 +1,16 @@
+# Core
+pyyaml>=6.0
+requests>=2.31
+
+# Caption rendering (overlay PNGs, so we don't depend on ffmpeg libass/drawtext)
+Pillow>=10.0
+
+# Captions / audio duration probing (ffprobe wrapper)
+# (ffmpeg/ffprobe themselves are installed via brew, not pip)
+
+# Optional voice backends (install only if you use them)
+# elevenlabs>=1.0          # paid cloud TTS, swappable backend
+# TTS>=0.22                # Coqui XTTS local voice cloning (heavy)
+
+# Scheduling
+schedule>=1.2

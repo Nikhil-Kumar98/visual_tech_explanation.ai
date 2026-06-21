@@ -1,0 +1,63 @@
+# ============================================================
+# visual_tech_explanation.ai — main configuration
+# Edit this file to control the whole pipeline. No code changes needed.
+# ============================================================
+
+project:
+  name: "visual_tech_explanation.ai"
+  # How many videos to produce per scheduled run.
+  videos_per_day: 2
+
+paths:
+  broll_library: "assets/broll"      # your reusable Kling clips live here
+  output: "assets/output"            # finished vertical videos
+  work: "assets/work"                # temp / intermediate files
+  intro: "assets/branding/intro.mp4" # optional 5s neural-net loop intro (leave file absent to skip)
+  outro: "assets/branding/outro.mp4" # optional outro (leave absent to skip)
+  music: "assets/branding/music.mp3" # optional background music (leave absent to skip)
+
+# ----------------------------- SCRIPT -----------------------------
+script:
+  backend: "ollama"          # ollama | gemini (gemini needs GEMINI_API_KEY)
+  model: "llama3.1:8b"       # ollama model name (pulled by setup.sh)
+  ollama_host: "http://localhost:11434"
+  target_seconds: 45         # rough length of the spoken script
+  scenes: 4                  # how many scenes to break the script into
+  tone: "energetic, clear, beginner-friendly tech explainer for short-form vertical video"
+
+# ----------------------------- VOICE ------------------------------
+voice:
+  backend: "say"             # say (macOS, free) | xtts (local clone, free) | elevenlabs (paid)
+  # macOS 'say' options:
+  say_voice: "Samantha"      # run `say -v '?'` to list voices
+  say_rate: 180              # words per minute
+  # xtts options (free local voice clone — needs `pip install TTS`):
+  xtts_speaker_wav: "assets/voice/sample.wav"   # 10-30s clean sample of YOUR voice
+  xtts_language: "en"
+  # elevenlabs options (paid — needs ELEVENLABS_API_KEY):
+  elevenlabs_voice_id: ""
+
+# ----------------------------- VIDEO ------------------------------
+video:
+  width: 1080
+  height: 1920               # 9:16 vertical
+  fps: 30
+  captions: true             # burn word/line captions onto the video
+  caption_font_size: 64
+  caption_color: "white"
+  caption_box: true          # dark box behind captions for readability
+  music_volume: 0.08         # 0.0 - 1.0, relative to voice
+
+# ---------------------------- POSTING -----------------------------
+posting:
+  backend: "queue"           # queue (safe, writes to publish queue) | postiz
+  postiz_url: "http://localhost:4007"   # your self-hosted Postiz base URL
+  # Which platforms to target. Must match the integration "identifier" in Postiz.
+  platforms: ["youtube", "instagram", "tiktok"]
+  auto_publish: false        # false = create DRAFTS you approve in Postiz; true = publish now
+  # Optional per-platform overrides merged into the required settings.
+  # Leave empty to use safe defaults (drafts/private until you flip auto_publish).
+  platform_settings:
+    youtube: {}              # e.g. {type: "public", selfDeclaredMadeForKids: "no"}
+    instagram: {}            # e.g. {post_type: "post"}
+    tiktok: {}               # e.g. {privacy_level: "PUBLIC_TO_EVERYONE", content_posting_method: "DIRECT_POST"}

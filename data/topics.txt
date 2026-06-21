@@ -1,0 +1,18 @@
+# One topic per line. Lines starting with # are ignored.
+# The orchestrator pops topics from the TOP of this file and marks them done
+# in data/topics_done.txt so the same topic isn't reused.
+how LLMs work
+what is an API
+cloud computing explained
+how neural networks learn
+what is a database
+how the internet works
+what is machine learning
+how encryption keeps you safe
+what is a GPU and why AI needs it
+how does WiFi actually work
+what is an operating system
+how do search engines rank pages
+what is a compiler
+how does GPS find your location
+what is containerization (Docker explained)
